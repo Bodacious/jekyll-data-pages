@@ -16,7 +16,7 @@ module Jekyll
 
     def url_placeholders
       data = self.data['data'].clone
-      data.each { |key, value| data[key] = value.to_s }
+      data.transform_values! { |value| value.to_s.downcase.gsub(/[^\w\-_]+/, "-") }
       {
         :path => @dir,
         :basename => basename,
